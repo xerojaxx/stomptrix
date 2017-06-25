@@ -1,0 +1,12 @@
+// Copyright 2017 Silicon Laboratories, Inc.
+//
+//
+
+Executing: bgbuild.exe
+Output:
+ALL OK
+
+Error:
+Unknown option 'n'.
+
+
