@@ -1,6 +1,6 @@
-src/sk6812.o: ../src/sk6812.c ../src/sk6812.h \
- ../src/led_strip_controller.h \
- c:\siliconlabs\simplicitystudio\v4\developer\sdks\gecko_sdk_suite\v1.0\platform\emlib\inc\em_cmu.h \
+emlib/em_dma.o: \
+ C:/SiliconLabs/SimplicityStudio/v4/developer/sdks/gecko_sdk_suite/v1.0/platform/emlib/src/em_dma.c \
+ c:\siliconlabs\simplicitystudio\v4\developer\sdks\gecko_sdk_suite\v1.0\platform\emlib\inc\em_dma.h \
  c:\siliconlabs\simplicitystudio\v4\developer\sdks\gecko_sdk_suite\v1.0\platform\device\siliconlabs\efr32bg1b\include\em_device.h \
  c:\siliconlabs\simplicitystudio\v4\developer\sdks\gecko_sdk_suite\v1.0\platform\device\siliconlabs\efr32bg1b\include\efr32bg1b132f256gm32.h \
  c:\siliconlabs\simplicitystudio\v4\developer\sdks\gecko_sdk_suite\v1.0\platform\cmsis\include\core_cm4.h \
@@ -44,21 +44,9 @@ src/sk6812.o: ../src/sk6812.c ../src/sk6812.h \
  c:\siliconlabs\simplicitystudio\v4\developer\sdks\gecko_sdk_suite\v1.0\platform\device\siliconlabs\efr32bg1b\include\efr32bg1b_prs_signals.h \
  c:\siliconlabs\simplicitystudio\v4\developer\sdks\gecko_sdk_suite\v1.0\platform\device\siliconlabs\efr32bg1b\include\efr32bg1b_dmareq.h \
  c:\siliconlabs\simplicitystudio\v4\developer\sdks\gecko_sdk_suite\v1.0\platform\device\siliconlabs\efr32bg1b\include\efr32bg1b_af_ports.h \
- c:\siliconlabs\simplicitystudio\v4\developer\sdks\gecko_sdk_suite\v1.0\platform\device\siliconlabs\efr32bg1b\include\efr32bg1b_af_pins.h \
- c:\siliconlabs\simplicitystudio\v4\developer\sdks\gecko_sdk_suite\v1.0\platform\emlib\inc\em_assert.h \
- c:\siliconlabs\simplicitystudio\v4\developer\sdks\gecko_sdk_suite\v1.0\platform\emlib\inc\em_bus.h \
- c:\siliconlabs\simplicitystudio\v4\developer\sdks\gecko_sdk_suite\v1.0\platform\emlib\inc\em_timer.h \
- c:\siliconlabs\simplicitystudio\v4\developer\sdks\gecko_sdk_suite\v1.0\platform\emlib\inc\em_gpio.h \
- c:\siliconlabs\simplicitystudio\v4\developer\sdks\gecko_sdk_suite\v1.0\platform\emdrv\dmadrv\inc\dmadrv.h \
- c:\siliconlabs\simplicitystudio\v4\developer\sdks\gecko_sdk_suite\v1.0\platform\emdrv\common\inc\ecode.h \
- c:\siliconlabs\simplicitystudio\v4\developer\sdks\gecko_sdk_suite\v1.0\platform\emlib\inc\em_ldma.h \
- c:\siliconlabs\simplicitystudio\v4\developer\sdks\gecko_sdk_suite\v1.0\platform\emdrv\dmadrv\config\dmadrv_config.h
+ c:\siliconlabs\simplicitystudio\v4\developer\sdks\gecko_sdk_suite\v1.0\platform\device\siliconlabs\efr32bg1b\include\efr32bg1b_af_pins.h
 
-../src/sk6812.h:
-
-../src/led_strip_controller.h:
-
-c:\siliconlabs\simplicitystudio\v4\developer\sdks\gecko_sdk_suite\v1.0\platform\emlib\inc\em_cmu.h:
+c:\siliconlabs\simplicitystudio\v4\developer\sdks\gecko_sdk_suite\v1.0\platform\emlib\inc\em_dma.h:
 
 c:\siliconlabs\simplicitystudio\v4\developer\sdks\gecko_sdk_suite\v1.0\platform\device\siliconlabs\efr32bg1b\include\em_device.h:
 
@@ -147,19 +135,3 @@ c:\siliconlabs\simplicitystudio\v4\developer\sdks\gecko_sdk_suite\v1.0\platform\
 c:\siliconlabs\simplicitystudio\v4\developer\sdks\gecko_sdk_suite\v1.0\platform\device\siliconlabs\efr32bg1b\include\efr32bg1b_af_ports.h:
 
 c:\siliconlabs\simplicitystudio\v4\developer\sdks\gecko_sdk_suite\v1.0\platform\device\siliconlabs\efr32bg1b\include\efr32bg1b_af_pins.h:
-
-c:\siliconlabs\simplicitystudio\v4\developer\sdks\gecko_sdk_suite\v1.0\platform\emlib\inc\em_assert.h:
-
-c:\siliconlabs\simplicitystudio\v4\developer\sdks\gecko_sdk_suite\v1.0\platform\emlib\inc\em_bus.h:
-
-c:\siliconlabs\simplicitystudio\v4\developer\sdks\gecko_sdk_suite\v1.0\platform\emlib\inc\em_timer.h:
-
-c:\siliconlabs\simplicitystudio\v4\developer\sdks\gecko_sdk_suite\v1.0\platform\emlib\inc\em_gpio.h:
-
-c:\siliconlabs\simplicitystudio\v4\developer\sdks\gecko_sdk_suite\v1.0\platform\emdrv\dmadrv\inc\dmadrv.h:
-
-c:\siliconlabs\simplicitystudio\v4\developer\sdks\gecko_sdk_suite\v1.0\platform\emdrv\common\inc\ecode.h:
-
-c:\siliconlabs\simplicitystudio\v4\developer\sdks\gecko_sdk_suite\v1.0\platform\emlib\inc\em_ldma.h:
-
-c:\siliconlabs\simplicitystudio\v4\developer\sdks\gecko_sdk_suite\v1.0\platform\emdrv\dmadrv\config\dmadrv_config.h:

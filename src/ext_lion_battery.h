@@ -7,5 +7,6 @@
 
 uint16_t battery_get_millvolts(void);
 void lion_battery_init(void);
+uint8_t battery_get_percentage(void);
 
 #endif /* SRC_EXT_LION_BATTERY_H_ */

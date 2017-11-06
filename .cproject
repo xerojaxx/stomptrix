@@ -130,8 +130,8 @@
 									<listOptionValue builtIn="false" value="-no-wchar-size-warning"/>
 								</option>
 								<option id="gnu.c.link.option.userobjs.1538921864" name="Other objects" superClass="gnu.c.link.option.userobjs" valueType="userObjs">
-									<listOptionValue builtIn="false" value="${StudioSdkPath}/protocol/bluetooth_2.3/lib/EFR32BG1B/GCC/bgapi.a"/>
 									<listOptionValue builtIn="false" value="${StudioSdkPath}/protocol/bluetooth_2.3/lib/EFR32BG1B/EABI/binbootloader.o"/>
+									<listOptionValue builtIn="false" value="${StudioSdkPath}/protocol/bluetooth_2.3/lib/EFR32BG1B/GCC/bgapi.a"/>
 									<listOptionValue builtIn="false" value="${StudioSdkPath}/protocol/bluetooth_2.3/lib/EFR32BG1B/EABI/stack.a"/>
 									<listOptionValue builtIn="false" value="${StudioSdkPath}/protocol/bluetooth_2.3/lib/EFR32BG1B/EABI/binstack.o"/>
 								</option>
@@ -148,7 +148,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="device/EFR32_B_1_1_B/iar|device/EFR32_B_1_1_P|device/EFR32_B_1_1_V|device/EFR32_B_1_2_P|device/EFR32_M_1_1_P|device/EFR32_M_1_2_P|device/EFR32_M_1_3_P|emlib/BRD4160A|emlib/RD-0057-0101|kit/BRD4100A|kit/BRD4101B|kit/BRD4103A|kit/BRD4150A|kit/BRD4150B|kit/BRD4150C|kit/BRD4151A|kit/BRD4153A|kit/BRD4161A|kit/BRD4162A|kit/BRD4163A|kit/BRD4164A|kit/BRD4300A|kit/BRD4300ArevA02|kit/BRD4300ArevA03|kit/BRD4300C|kit/BRD4302A" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding=".git/objects/info|.git/objects/pack|.git/refs/tags|device/EFR32_B_1_1_B/iar|device/EFR32_B_1_1_P|device/EFR32_B_1_1_V|device/EFR32_B_1_2_P|device/EFR32_M_1_1_P|device/EFR32_M_1_2_P|device/EFR32_M_1_3_P|emlib/BRD4160A|emlib/RD-0057-0101|kit/BRD4100A|kit/BRD4101B|kit/BRD4103A|kit/BRD4150A|kit/BRD4150B|kit/BRD4150C|kit/BRD4151A|kit/BRD4153A|kit/BRD4161A|kit/BRD4162A|kit/BRD4163A|kit/BRD4164A|kit/BRD4300A|kit/BRD4300ArevA02|kit/BRD4300ArevA03|kit/BRD4300C|kit/BRD4302A" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>

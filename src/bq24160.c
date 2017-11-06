@@ -12,7 +12,7 @@
 static void bq24160_set_charge_voltage(void)
 {
 	I2C_TransferSeq_TypeDef    seq;
-	I2C_TransferReturn_TypeDef ret;
+	//I2C_TransferReturn_TypeDef ret;
 	uint8_t regid[1];
 	uint8_t data[1] = {0x78}; // Set to 4.1V
 
@@ -26,7 +26,7 @@ static void bq24160_set_charge_voltage(void)
 	seq.buf[1].data = data;
 	seq.buf[1].len  = 1;
 
-	ret = I2CSPM_Transfer(I2C0, &seq);
+	(void)I2CSPM_Transfer(I2C0, &seq);
 }
 void bq24160_init(void)
 {

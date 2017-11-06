@@ -10,63 +10,43 @@
 #include "em_cmu.h"
 #include "em_timer.h"
 #include "em_gpio.h"
+#include "dmadrv.h"
+#include "em_ldma.h"
 
 #define SK_TIMER TIMER1
 #define SK_TIMER_CC_CH 0u
+#define DMA_CHANNEL_TIMER 0
 
-#define SK6812_BIT_PERIOD_NS 5000u //1250u
+// 1.25us per bit. PWM 0.3us high time for low bit, 0.6us for high bit.
+#define SK6812_BIT_PERIOD_NS 1250u
 #define SK6812_BIT_0_NS 300u
 #define SK6812_BIT_1_NS 600u
-#define SK6812_RESET_PERIOD_NS 100000u
+#define SK6812_RESET_PERIOD_NS 50000u
 
-#define MAX_LEDS 50u
+#define MAX_LEDS 60u
 
-static colour_rgb_t colours_to_set[MAX_LEDS] = {0u};
 
-static uint32_t total_leds_to_set;
-static uint8_t current_bit_to_write;
-static uint8_t current_led_to_write;
-
-static bool sending_last_bit = false;
 static uint16_t ticks_per_bit_period;
 static uint16_t cc_ticks_for_bit_0;
 static uint16_t cc_ticks_for_bit_1;
 static uint16_t reset_period_ticks;
 
-void TIMER1_IRQHandler(void)
+static uint16_t total_bits_to_write;
+static uint16_t current_bit_to_write;
+static uint8_t cc_timings_buffer[(MAX_LEDS+1u)*3u*8u];
+static volatile bool busy = false;
+
+static unsigned int dma_ch_id;
+
+bool timer_dma_callback( unsigned int channel,
+						   unsigned int sequenceNo,
+						   void *userParam )
 {
-	TIMER_IntClear(SK_TIMER, TIMER_IF_CC0 | TIMER_IF_OF); // Clear interrupt source
-
-
-	if (sending_last_bit)
-	{
-		sending_last_bit = false;
-		TIMER_Enable(SK_TIMER, false);
-		TIMER_IntDisable(SK_TIMER, TIMER_IF_CC0);
-		SK_TIMER->ROUTEPEN &= ~TIMER_ROUTEPEN_CC0PEN;
-		return;
-	}
-
-	current_bit_to_write--;
-	bool next_bit = (colours_to_set[current_led_to_write] & (1 << current_bit_to_write)) > 0u;
-	TIMER_CompareSet(SK_TIMER, SK_TIMER_CC_CH, next_bit ? cc_ticks_for_bit_1 : cc_ticks_for_bit_0);
-
-	if (current_bit_to_write == 0u)
-	{
-		if (current_led_to_write == (total_leds_to_set-1u))
-		{
-			sending_last_bit = true;
-		}
-		else
-		{
-			// Start next LED data
-			current_led_to_write++;
-			current_bit_to_write = 24u;
-		}
-	}
+	TIMER_Enable(SK_TIMER, false);
+	SK_TIMER->ROUTEPEN &= ~TIMER_ROUTEPEN_CC0PEN;
+	busy = false;
+	return false;
 }
-
-// 1.25us per bit. PWM 0.3us high time for low bit, 0.6us for high bit.
 
 void sk6812_init()
 {
@@ -86,15 +66,12 @@ void sk6812_init()
 	CMU_ClockEnable(cmuClock_GPIO, true);
 	GPIO_PinModeSet(gpioPortF, 2, gpioModePushPull, 0);
 
-//	static volatile uint32_t delay = 100000u;
-//	while(--delay>0u){}
-
 	TIMER_Init_TypeDef timer_settings = TIMER_INIT_DEFAULT;
 	timer_settings.enable = false;
+	timer_settings.dmaClrAct = true;
 	//timer_settings.
 	TIMER_Init(SK_TIMER, &timer_settings);
 	NVIC_EnableIRQ(TIMER1_IRQn);
-	//NVIC_SetPriority(TIMER1_IRQn, 0u);
 
 	TIMER_TopSet(SK_TIMER, ticks_per_bit_period);
 	SK_TIMER->ROUTELOC0 |= TIMER_ROUTELOC0_CC0LOC_LOC26;
@@ -114,6 +91,9 @@ void sk6812_init()
 		.outInvert  = false,                  // non-inverted output
 	};
 	TIMER_InitCC(SK_TIMER, SK_TIMER_CC_CH, &timerCCInit);
+
+	(void)DMADRV_AllocateChannel( &dma_ch_id, NULL );
+
 }
 
 int sk6812_set_colours(uint16_t num_of_leds, colour_rgb_t led_colour_values[])
@@ -122,17 +102,61 @@ int sk6812_set_colours(uint16_t num_of_leds, colour_rgb_t led_colour_values[])
 	{
 		return ERROR_TRYING_TO_SET_TOO_MANY_LEDS;
 	}
+	if(busy)
+	{
+		return ERROR_BUSY_SETTING_LEDS;
+	}
+	busy = true;
+	total_bits_to_write = (num_of_leds) * 3u * 8u;
+	current_bit_to_write = 24u;
+	uint8_t current_led_to_write = 0u;
 
-	memcpy(colours_to_set, led_colour_values, sizeof(colour_rgb_t)*num_of_leds);
-	total_leds_to_set = num_of_leds;
-	current_bit_to_write = 23u;
-	current_led_to_write = 0u;
+	colour_rgb_t temp;
+	for(uint16_t i=0; i<num_of_leds; i++)
+	{
+		temp = led_colour_values[i];
+		led_colour_values[i] = (temp & 0x000000FF) |
+				((temp & 0x00FF0000)>>8u) |
+				((temp & 0x0000FF00)<<8u);
+	}
 
+	// Pre-load all the CC timings into a massive buffer.
+	for(uint16_t i=0u; i<(total_bits_to_write+1); i++)
+	{
+		if(i >= total_bits_to_write)
+		{
+			// Setup Zeros after the end because timer is not stopped in time.
+			cc_timings_buffer[i] = cc_ticks_for_bit_0;
+		}
+		else
+		{
+			bool next_bit = (led_colour_values[current_led_to_write] & (1 << (current_bit_to_write-1u))) > 0u;
+			cc_timings_buffer[i] = next_bit ? cc_ticks_for_bit_1 : cc_ticks_for_bit_0;
+		}
+		current_bit_to_write--;
+		if (current_bit_to_write == 0u)
+		{
+			current_bit_to_write = 24u;
+			current_led_to_write++;
+		}
+	}
+
+	if(DMADRV_MemoryPeripheral( dma_ch_id,
+							 dmadrvPeripheralSignal_TIMER1_UFOF,
+							 &SK_TIMER->CC[SK_TIMER_CC_CH].CCV,
+							 &cc_timings_buffer[0u],
+							 true,
+							 (int)(total_bits_to_write+1),
+							 dmadrvDataSize1,
+							 timer_dma_callback,
+							 NULL ) != ECODE_OK)
+	{
+		busy = false;
+		return 0;
+	}
+
+	TIMER_CompareSet(SK_TIMER, SK_TIMER_CC_CH, cc_timings_buffer[0]);
 	TIMER_CounterSet(SK_TIMER, 0u);
-	TIMER_IntEnable(SK_TIMER, TIMER_IF_CC0);
-
-	bool next_bit = (colours_to_set[current_led_to_write] & (1 << current_bit_to_write)) > 0u;
-	TIMER_CompareSet(SK_TIMER, SK_TIMER_CC_CH, next_bit ? cc_ticks_for_bit_1 : cc_ticks_for_bit_0);
 
 	SK_TIMER->ROUTEPEN |= TIMER_ROUTEPEN_CC0PEN;
 	TIMER_Enable(SK_TIMER, true);

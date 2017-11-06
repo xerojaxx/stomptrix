@@ -24,7 +24,7 @@
 #include "em_gpcrc.h"
 #include "em_gpio.h"
 #include "em_i2c.h"
-#include "em_ldma.h"
+//#include "em_ldma.h"
 #include "em_prs.h"
 #include "em_rtcc.h"
 // [Library includes]$

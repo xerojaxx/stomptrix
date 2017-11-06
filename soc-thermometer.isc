@@ -75,7 +75,7 @@ PATH(PROJECT_RELATIVE):main.c
       <informativeText>Abstract: The Health Thermometer service exposes temperature and other data from a thermometer intended for healthcare and fitness applications. Summary: The Health Thermometer service is instantiated as a Primary Service. There are one or more instantiations of the Health Thermometer service per device claiming conformance with this specification. </informativeText>
       <characteristic id="colour" name="Colour" sourceId="custom.type" uuid="2A20">
         <informativeText>Custom characteristic</informativeText>
-        <value length="4" type="user" variable_length="false">0x00000000</value>
+        <value length="20" type="user" variable_length="false">0x00000000</value>
         <properties write="true" write_requirement="optional"/>
       </characteristic>
       <characteristic id="battery" name="Battery" sourceId="org.bluetooth.characteristic.battery_level" uuid="2A19">

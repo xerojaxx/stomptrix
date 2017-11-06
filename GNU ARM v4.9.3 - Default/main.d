@@ -68,11 +68,17 @@ main.o: ../main.c ../boards.h ../ble-configuration.h ../board_features.h \
  c:\siliconlabs\simplicitystudio\v4\developer\sdks\gecko_sdk_suite\v1.0\platform\emlib\inc\em_i2c.h \
  c:\siliconlabs\simplicitystudio\v4\developer\sdks\gecko_sdk_suite\v1.0\hardware\kit\common\drivers\si7013.h \
  c:\siliconlabs\simplicitystudio\v4\developer\sdks\gecko_sdk_suite\v1.0\hardware\kit\common\drivers\tempsens.h \
+ c:\siliconlabs\simplicitystudio\v4\developer\sdks\gecko_sdk_suite\v1.0\platform\emdrv\dmadrv\inc\dmadrv.h \
+ c:\siliconlabs\simplicitystudio\v4\developer\sdks\gecko_sdk_suite\v1.0\platform\emdrv\common\inc\ecode.h \
+ c:\siliconlabs\simplicitystudio\v4\developer\sdks\gecko_sdk_suite\v1.0\platform\emlib\inc\em_ldma.h \
+ c:\siliconlabs\simplicitystudio\v4\developer\sdks\gecko_sdk_suite\v1.0\platform\emdrv\dmadrv\config\dmadrv_config.h \
  C:\Users\Mark\SimplicityStudio\v4_workspace\soc-thermometer\src/ext_lion_battery.h \
  C:\Users\Mark\SimplicityStudio\v4_workspace\soc-thermometer\src/bq24160.h \
  C:\Users\Mark\SimplicityStudio\v4_workspace\soc-thermometer\src/led_strip_controller.h \
  C:\Users\Mark\SimplicityStudio\v4_workspace\soc-thermometer\src/sk6812.h \
- C:\Users\Mark\SimplicityStudio\v4_workspace\soc-thermometer\src/led_strip_controller.h
+ C:\Users\Mark\SimplicityStudio\v4_workspace\soc-thermometer\src/led_strip_controller.h \
+ C:\Users\Mark\SimplicityStudio\v4_workspace\soc-thermometer\src/timer.h \
+ C:\Users\Mark\SimplicityStudio\v4_workspace\soc-thermometer\src/stomptrix_msgs.h
 
 ../boards.h:
 
@@ -220,6 +226,14 @@ c:\siliconlabs\simplicitystudio\v4\developer\sdks\gecko_sdk_suite\v1.0\hardware\
 
 c:\siliconlabs\simplicitystudio\v4\developer\sdks\gecko_sdk_suite\v1.0\hardware\kit\common\drivers\tempsens.h:
 
+c:\siliconlabs\simplicitystudio\v4\developer\sdks\gecko_sdk_suite\v1.0\platform\emdrv\dmadrv\inc\dmadrv.h:
+
+c:\siliconlabs\simplicitystudio\v4\developer\sdks\gecko_sdk_suite\v1.0\platform\emdrv\common\inc\ecode.h:
+
+c:\siliconlabs\simplicitystudio\v4\developer\sdks\gecko_sdk_suite\v1.0\platform\emlib\inc\em_ldma.h:
+
+c:\siliconlabs\simplicitystudio\v4\developer\sdks\gecko_sdk_suite\v1.0\platform\emdrv\dmadrv\config\dmadrv_config.h:
+
 C:\Users\Mark\SimplicityStudio\v4_workspace\soc-thermometer\src/ext_lion_battery.h:
 
 C:\Users\Mark\SimplicityStudio\v4_workspace\soc-thermometer\src/bq24160.h:
@@ -229,3 +243,7 @@ C:\Users\Mark\SimplicityStudio\v4_workspace\soc-thermometer\src/led_strip_contro
 C:\Users\Mark\SimplicityStudio\v4_workspace\soc-thermometer\src/sk6812.h:
 
 C:\Users\Mark\SimplicityStudio\v4_workspace\soc-thermometer\src/led_strip_controller.h:
+
+C:\Users\Mark\SimplicityStudio\v4_workspace\soc-thermometer\src/timer.h:
+
+C:\Users\Mark\SimplicityStudio\v4_workspace\soc-thermometer\src/stomptrix_msgs.h:

@@ -42,7 +42,7 @@
       <!--Colour-->
       <characteristic id="colour" name="Colour" sourceId="custom.type" uuid="2A20">
         <informativeText>Custom characteristic</informativeText>
-        <value length="4" type="user" variable_length="false">0x00000000</value>
+        <value length="20" type="user" variable_length="false">0x00000000</value>
         <properties write="true" write_requirement="optional"/>
       </characteristic>
       

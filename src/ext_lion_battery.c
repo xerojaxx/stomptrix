@@ -35,3 +35,35 @@ uint16_t battery_get_millvolts(void)
 	// 2.5V ref, 12bit adc, 100k/100k voltage divider on battery.
 	return ((uint32_t)raw_adc * 5000uL) / 4096uL;
 }
+
+uint8_t battery_get_percentage(void)
+{
+	typedef struct{
+		uint16_t voltage_mv;
+		uint8_t percent;
+	}batt_percent_lookup_t;
+
+	static batt_percent_lookup_t batt_lookup[] =
+	{
+			{4100u, 100u},
+			{4000u, 90u},
+			{3900u, 80u},
+			{3800u, 70u},
+			{3700u, 60u},
+			{3600u, 50u},
+			{3500u, 40u},
+			{3400u, 30u},
+			{3300u, 20u},
+			{3200u, 10u}
+	};
+	uint16_t batt_mv = battery_get_millvolts();
+
+	for(uint8_t i=0u; i<(sizeof(batt_lookup)/sizeof(batt_percent_lookup_t)); i++)
+	{
+		if( batt_mv > batt_lookup[i].voltage_mv)
+		{
+			return batt_lookup[i].percent;
+		}
+	}
+	return 0u;
+}

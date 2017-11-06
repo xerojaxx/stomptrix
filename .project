@@ -28,17 +28,12 @@
 		<link>
 			<name>bgapi/dmadrv.c</name>
 			<type>1</type>
-			<locationURI>STUDIO_SDK_LOC/platform/emdrv/dmadrv/src/dmadrv.c</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/SiliconLabs/SimplicityStudio/v4/developer/sdks/gecko_sdk_suite/v1.0/platform/emdrv/dmadrv/src/dmadrv.c</locationURI>
 		</link>
 		<link>
 			<name>bgapi/em_adc.c</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/platform/emlib/src/em_adc.c</locationURI>
-		</link>
-		<link>
-			<name>bgapi/em_ldma.c</name>
-			<type>1</type>
-			<locationURI>STUDIO_SDK_LOC/platform/emlib/src/em_ldma.c</locationURI>
 		</link>
 		<link>
 			<name>bgapi/em_leuart.c</name>
@@ -71,6 +66,11 @@
 			<locationURI>STUDIO_SDK_LOC/platform/emlib/src/em_i2c.c</locationURI>
 		</link>
 		<link>
+			<name>emlib/em_ldma.c</name>
+			<type>1</type>
+			<locationURI>PARENT-5-PROJECT_LOC/SiliconLabs/SimplicityStudio/v4/developer/sdks/gecko_sdk_suite/v1.0/platform/emlib/src/em_ldma.c</locationURI>
+		</link>
+		<link>
 			<name>emlib/em_msc.c</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/platform/emlib/src/em_msc.c</locationURI>
@@ -88,7 +88,7 @@
 		<link>
 			<name>emlib/em_timer.c</name>
 			<type>1</type>
-			<locationURI>PARENT-5-PROJECT_LOC/SiliconLabs/SimplicityStudio/v4/developer/sdks/gecko_sdk_suite/v1.0/platform/emlib/src/em_timer.c</locationURI>
+			<locationURI>STUDIO_SDK_LOC/platform/emlib/src/em_timer.c</locationURI>
 		</link>
 		<link>
 			<name>emlib/em_usart.c</name>
